@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+    /* background-image: url(./img/124814988-frozen-window-glass-abstract-natural-background-color-gradient-winter-window.jpg); */
 }
 
 .App-logo {
@@ -42,4 +43,8 @@
     justify-content: center;
     align-items: center;
     font-family: 'Indie Flower', cursive;
+}
+
+ul {
+    list-style-type: none;
 }
