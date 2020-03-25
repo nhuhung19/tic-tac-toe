@@ -1,36 +1,79 @@
 import React, { Component } from 'react'
 import Square from './Square'
 
+
+const caculateWinner = (squares) => {
+    const arrayWinner = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 4, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ]
+    for (let i = 0; i < arrayWinner.length; i++) {
+        const [a, b, c] = arrayWinner[i]
+        if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+            return squares[a]
+        }
+    }
+    return null
+}
 export default class Broad extends Component {
-   
+    constructor(props){
+        super(props)
+        this.state = {
+            timeStart : null
+        }
+    }
+
+    
+
     onSquareClick = (i) => {
-        if(this.props.caculateWinner || this.props.squares[i]){
+        if(!this.state.timeStart){
+            let timeStart = Date.now()
+            this.setState({
+                timeStart: timeStart
+            })
+        }
+        if (caculateWinner(this.props.squares) || this.props.squares[i]) {
             return
         }
-        console.log('index', this.props.historyGames)
-        let historyGames = this.props.historyGames.slice(0, this.props.stepNumber + 1)
-        let current = historyGames[historyGames.length - 1]
-        let squareList = current.squares.slice()
+        let squareList = this.props.squares.slice()
         squareList[i] = this.props.nextPlayer ? 'O' : 'X'
-        console.log('stepNumber', this.props.historyGames.length)
-        this.props.setParentState({ 
-            historyGames: historyGames.concat([{squares: squareList}]), 
+        this.props.setParentState({
+            squares: squareList,
             nextPlayer: !this.props.nextPlayer,
-            stepNumber: historyGames.length
+            history: [...this.props.history, { squares: squareList, nextPlayer: !this.props.nextPlayer }],
         })
     }
+
+    
+
+
+    
     render() {
-        const winner = this.props.caculateWinner
+       
+        const winner = caculateWinner(this.props.squares)
+        let timeScores
+        // let fullSquares = this.checkSquare()
+        // console.log(fullSquares)
         let status = ''
-        if(winner) {
+        if (winner || this.props.squares.every((square) => square !== '')) {
             status = 'Winner ' + winner
-        } else{
+            timeScores = Math.ceil((Date.now() - this.state.timeStart)/1000)
+            this.props.postData(timeScores)
+            
+        } else {
             status = this.props.nextPlayer ? 'Next Player: O' : 'Next Player: X'
         }
-        
+
         return (
             <div>
                 <h2>{status}</h2>
+                <h2>Score: {timeScores}</h2>
                 <div style={{ display: 'flex' }}>
                     <Square value={this.props.squares[0]} onClick={() => this.onSquareClick(0)} />
                     <Square value={this.props.squares[1]} onClick={() => this.onSquareClick(1)} />
