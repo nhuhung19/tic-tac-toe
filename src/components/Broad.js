@@ -21,6 +21,7 @@ const caculateWinner = (squares) => {
     }
     return null
 }
+let gameOver = true
 export default class Broad extends Component {
     constructor(props) {
         super(props)
@@ -55,23 +56,22 @@ export default class Broad extends Component {
 
 
     render() {
-
-        const winner = caculateWinner(this.props.squares)
-        let timeScores
-        // let fullSquares = this.checkSquare()
-        // console.log(fullSquares)
         let status = ''
-        if (winner || this.props.squares.every((square) => square !== '')) {
-            status = 'Winner ' + winner
-            // if (this.props.squares.every((square) => square !== '')) {
-            //     status = 'GameOver'
-            // }
-            timeScores = Math.ceil((Date.now() - this.state.timeStart) / 1000)
-            this.props.postData(timeScores)
-            return
+        let timeScores
+        if (gameOver) {
+            status = 'Game Over'
         } else {
-            status = this.props.nextPlayer ? 'Next Player: O' : 'Next Player: X'
+            let winner = caculateWinner(this.props.squares)
+            if (winner || this.props.squares.every((square) => square !== '')) {
+                status = 'Winner ' + winner
+                timeScores = Math.ceil((Date.now() - this.state.timeStart) / 1000)
+                this.props.postData(timeScores)
+                // return
+            } else {
+                status = this.props.nextPlayer ? 'Next Player: O' : 'Next Player: X'
+            }
         }
+
 
         return (
             <div>
