@@ -63,9 +63,9 @@ export default class Broad extends Component {
         let status = ''
         if (winner || this.props.squares.every((square) => square !== '')) {
             status = 'Winner ' + winner
-            if (this.props.squares.every((square) => square !== '')) {
-                status = 'GameOver'
-            }
+            // if (this.props.squares.every((square) => square !== '')) {
+            //     status = 'GameOver'
+            // }
             timeScores = Math.ceil((Date.now() - this.state.timeStart) / 1000)
             this.props.postData(timeScores)
 
