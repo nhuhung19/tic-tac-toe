@@ -13,7 +13,7 @@ export default class App extends React.Component {
             nextPlayer: false, // false is X, true is O
             history: [],
             user: '',
-            highScores: []
+            highScores: null
         }
     }
 
@@ -45,7 +45,6 @@ export default class App extends React.Component {
             body: data.toString(),
             json: true
         });
-        this.getData()
     }
 
     getData = async () => {
@@ -59,9 +58,9 @@ export default class App extends React.Component {
         console.log(data)
     }
 
-    // componentDidMount() {
-        
-    // }
+    componentDidMount() {
+        this.getData()
+    }
 
     render() {
         if (!this.state.user) {
@@ -69,11 +68,11 @@ export default class App extends React.Component {
                 <Facebook {...this.state} setParentState={this.setParentState} />
             )
         }
-        // if (!this.state.highScores) {
-        //     return (
-        //         <div>Loading...</div>
-        //     )
-        // }
+        if (!this.state.highScores) {
+            return (
+                <div>Loading...</div>
+            )
+        }
         return (
             <div className="text-center App">
                 <h1>Tic Tac Toe</h1>
