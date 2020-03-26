@@ -69,11 +69,11 @@ export default class App extends React.Component {
                 <Facebook {...this.state} setParentState={this.setParentState} />
             )
         }
-        // if (!this.state.highScores) {
-        //     return (
-        //         <div>Loading...</div>
-        //     )
-        // }
+        if (!this.state.highScores) {
+            return (
+                <div>Loading...</div>
+            )
+        }
         return (
             <div className="text-center App">
                 <h1>Tic Tac Toe</h1>
