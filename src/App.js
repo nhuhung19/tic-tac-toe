@@ -45,6 +45,7 @@ export default class App extends React.Component {
             body: data.toString(),
             json: true
         });
+        this.getData()
     }
 
     getData = async () => {
@@ -58,9 +59,9 @@ export default class App extends React.Component {
         console.log(data)
     }
 
-    componentDidMount() {
-        this.getData()
-    }
+    // componentDidMount() {
+        
+    // }
 
     render() {
         if (!this.state.user) {
