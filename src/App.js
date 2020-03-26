@@ -59,9 +59,9 @@ export default class App extends React.Component {
         console.log(data)
     }
 
-    // componentDidMount() {
-        
-    // }
+    componentDidMount() {
+        this.getData()
+    }
 
     render() {
         if (!this.state.user) {
