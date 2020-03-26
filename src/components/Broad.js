@@ -21,19 +21,18 @@ const caculateWinner = (squares) => {
     }
     return null
 }
-let gameOver = true
 export default class Broad extends Component {
-    constructor(props) {
+    constructor(props){
         super(props)
         this.state = {
-            timeStart: null
+            timeStart : null
         }
     }
 
-
+    
 
     onSquareClick = (i) => {
-        if (!this.state.timeStart) {
+        if(!this.state.timeStart){
             let timeStart = Date.now()
             this.setState({
                 timeStart: timeStart
@@ -51,27 +50,25 @@ export default class Broad extends Component {
         })
     }
 
+    
 
 
-
-
+    
     render() {
-        let status = ''
+       
+        const winner = caculateWinner(this.props.squares)
         let timeScores
-        if (gameOver) {
-            status = 'Game Over'
+        // let fullSquares = this.checkSquare()
+        // console.log(fullSquares)
+        let status = ''
+        if (winner || this.props.squares.every((square) => square !== '')) {
+            status = 'Winner ' + winner
+            timeScores = Math.ceil((Date.now() - this.state.timeStart)/1000)
+            this.props.postData(timeScores)
+            
         } else {
-            let winner = caculateWinner(this.props.squares)
-            if (winner || this.props.squares.every((square) => square !== '')) {
-                status = 'Winner ' + winner
-                timeScores = Math.ceil((Date.now() - this.state.timeStart) / 1000)
-                this.props.postData(timeScores)
-                // return
-            } else {
-                status = this.props.nextPlayer ? 'Next Player: O' : 'Next Player: X'
-            }
+            status = this.props.nextPlayer ? 'Next Player: O' : 'Next Player: X'
         }
-
 
         return (
             <div>
