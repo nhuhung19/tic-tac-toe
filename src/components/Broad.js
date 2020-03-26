@@ -68,7 +68,7 @@ export default class Broad extends Component {
             // }
             timeScores = Math.ceil((Date.now() - this.state.timeStart) / 1000)
             this.props.postData(timeScores)
-
+            return
         } else {
             status = this.props.nextPlayer ? 'Next Player: O' : 'Next Player: X'
         }
