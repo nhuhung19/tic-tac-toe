@@ -36,7 +36,7 @@ export default class App extends React.Component {
         let data = new URLSearchParams();
         data.append("player", this.state.user); // data you wantna post (key, value)
         data.append("score", timeScore); // {player: "PLAYER_NAME", score: "TIME_ELAPSED_IN_SECONDS"}
-        const url = `https://ftw-highscores.herokuapp.com/tictactoe-hung`;
+        const url = `https://ftw-highscores.herokuapp.com/tictactoe-dev`;
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -48,7 +48,7 @@ export default class App extends React.Component {
     }
 
     getData = async () => {
-        const url = `https://ftw-highscores.herokuapp.com/tictactoe-hung`;
+        const url = `https://ftw-highscores.herokuapp.com/tictactoe-dev`;
         let response = await fetch(url)
         let data = await response.json()
         this.setState({
