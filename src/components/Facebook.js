@@ -17,7 +17,7 @@ export default class Facebook extends Component {
         return (
             <div className="d-flex justify-content-center align-items-center">
                     <FacebookLogin
-                    appId="1000293550354880"
+                    appId="257738505232021"
                     autoLoad={false}
                     fields="name,email,picture"
                     callback={(resp) => this.responseFacebook(resp)} />
